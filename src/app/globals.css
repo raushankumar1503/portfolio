@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+/*
+  ─────────────────────────────────────────────────────────────
+  RAUSHANPORTFOLIO — DESIGN SYSTEM
+  Editorial-technical identity: warm paper + deep ink + one
+  refined steel-blue accent. Restrained, typographic, architectural.
+  Tokens are defined here (CSS-first Tailwind v4) and consumed
+  by every component so the whole site shares one system.
+  ─────────────────────────────────────────────────────────────
+*/
+
+@theme inline {
+  /* Typefaces (loaded via next/font in layout.tsx) */
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Color palette */
+  --color-paper: #f7f5f0;        /* page ground, warm-neutral, low glare */
+  --color-paper-raised: #fdfdfb; /* raised surfaces / cards */
+  --color-ink: #16181d;          /* primary text / identity black */
+  --color-ink-soft: #363a42;     /* secondary text */
+  --color-ink-faint: #646a73;    /* tertiary / captions */
+  --color-accent: #2c4f86;       /* single refined steel-blue accent */
+  --color-accent-deep: #1e375f;  /* hover / focus of accent */
+  --color-line: #dfdcd4;         /* hairline border on paper */
+  --color-line-strong: #c6c2b8;  /* stronger structural hairline */
+  --color-focus: #1e6fd9;        /* visible keyboard focus ring */
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* keep anchored sections clear of the fixed nav */
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  line-height: 1.6;
+}
+
+/* ── Focus visibility (accessibility) ─────────────────────── */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+  color: var(--color-ink);
+}
+
+/* ── Typography primitives ────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 650;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+/* Respect reduced-motion globally for the CSS layer */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Utilities (shared design-language primitives) ────────── */
+
+/* Structural hairline separators used as real information, not decoration */
+.hairline-t {
+  border-top: 1px solid var(--color-line);
+}
+
+.hairline-b {
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* Balanced, editorial reading measure */
+.measure {
+  max-width: 65ch;
+}
+
+/* Small index numeral — used ONLY where the list is a real sequence */
+.index-numeral {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 60;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.skip-link:focus-visible {
+  left: 0;
+}
