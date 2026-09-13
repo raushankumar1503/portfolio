@@ -48,6 +48,9 @@ export const metadata: Metadata = {
     "C++ developer",
     "web developer",
   ],
+  icons: {
+    icon: "/favicon.ico",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
