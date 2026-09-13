@@ -1,6 +1,6 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import Image from "next/image";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Container } from "@/components/site/Container";
 import { Button } from "@/components/site/Button";
@@ -8,21 +8,8 @@ import { ArrowDownIcon } from "@/components/site/icons";
 import { heroCta, profile } from "@/content/portfolio";
 
 /**
- * Lazy-load the 3D scene after mount (ssr:false keeps WebGL out of the
- * server render and out of the initial critical path). Renders nothing
- * synchronous; the canvas is progressively enhanced.
- */
-const HeroCanvas = dynamic(
-  () => import("@/components/hero/HeroCanvas").then((m) => m.default),
-  {
-    ssr: false,
-    loading: () => <div className="h-full w-full" aria-hidden="true" />,
-  },
-);
-
-/**
  * Hero — strong first impression. Typography is the primary layer; the
- * 3D canvas is a subtle supporting depth field in its own framed panel.
+ * photo is a professional headshot in its own framed panel.
  */
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -98,10 +85,17 @@ export function Hero() {
           </motion.a>
         </motion.div>
 
-        {/* 3D panel */}
+        {/* Profile photo */}
         <div className="relative aspect-square w-full lg:aspect-[4/5]">
-          <div className="absolute inset-0 rounded-[2px] border border-line">
-            <HeroCanvas />
+          <div className="absolute inset-0 rounded-[2px] border border-line overflow-hidden">
+            <Image
+              src="/profile.jpg"
+              alt={`${profile.name} — ${profile.role}`}
+              fill
+              className="object-cover object-top"
+              priority
+              sizes="(max-width: 1024px) 100vw, 45vw"
+            />
           </div>
         </div>
       </Container>
