@@ -4,6 +4,7 @@ import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { profile, SITE_URL } from "@/content/portfolio";
+import { withBasePath } from "@/lib/basePath";
 import "./globals.css";
 
 /* Display typeface — characterful editorial grotesk. */
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
     "web developer",
   ],
   icons: {
-    icon: "/favicon.ico",
+    icon: withBasePath("/favicon.ico"),
   },
   openGraph: {
     type: "website",
