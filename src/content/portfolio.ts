@@ -35,6 +35,8 @@ export const profile = {
   location: "India",
 };
 
+import { withBasePath } from "@/lib/basePath";
+
 /** Professional contact links — all real. */
 export const links = {
   email: "raushankumar85881@gmail.com",
@@ -42,7 +44,7 @@ export const links = {
   github: "https://github.com/raushankumar1503",
   linkedin: "https://www.linkedin.com/in/raushan-kumar13",
   /** Placeholder PDF until a real resume file is provided. */
-  resume: "/Raushan-Kumar-CV.pdf",
+  resume: withBasePath("/Raushan-Kumar-CV.pdf"),
 };
 
 /** Primary/secondary hero actions. */
@@ -253,7 +255,7 @@ export const certifications = {
 export const resume = {
   heading: "Resume / CV",
   /** No real CV PDF supplied yet — points at the placeholder file. */
-  file: "/Raushan-Kumar-CV.pdf",
+  file: withBasePath("/Raushan-Kumar-CV.pdf"),
   previewNote:
     "A placeholder CV is shown here. Add your real CV to replace the preview and download buttons.",
 };
