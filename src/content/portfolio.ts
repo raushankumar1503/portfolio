@@ -16,7 +16,7 @@
  * Where the deployed site will live. No live domain supplied yet —
  * a placeholder base keeps canonical/OG URLs valid at build.
  */
-export const SITE_URL = "https://example.com";
+export const SITE_URL = "https://raushankumar1503.github.io/portfolio";
 
 /** Owner — real profile details. */
 export const profile = {

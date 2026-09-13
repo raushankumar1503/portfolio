@@ -1,43 +1,26 @@
 /**
- * Runtime base path resolver for GitHub Pages deployment.
- * On GitHub Pages the site lives under /<repo>/, so all public-asset
- * references must be prefixed at runtime.
- * The CI step (actions/configure-pages) injects basePath into next.config
- * during the build; we mirror that same base path here for component-level asset URLs.
+ * Base path for this GitHub Pages deployment.
+ * The site is served from https://raushankumar1503.github.io/portfolio/,
+ * so every public-asset URL must be prefixed with "/portfolio".
+ * This constant is fixed for this repository and is NOT read from an
+ * environment variable, because at runtime (static export / browser)
+ * those env vars are unavailable.
  */
+export const BASE_PATH = "/portfolio";
 
 /**
- * Returns the base path for the current deployment.
- * In production (GitHub Pages) this is "/portfolio".
- * Locally / in preview it's "".
- */
-export function getBasePath(): string {
-  // NEXT_PUBLIC_BASE_PATH is set by actions/configure-pages at build time.
-  // Fallback to repo-name heuristic for local preview.
-  if (typeof process !== "undefined" && process.env.NEXT_PUBLIC_BASE_PATH) {
-    return process.env.NEXT_PUBLIC_BASE_PATH;
-  }
-  return "";
-}
-
-/**
- * Prefix a public-asset path with the current base path.
- * Usage: withBasePath("/profile.jpg") → "/portfolio/profile.jpg" on Pages.
+ * Prefix a public-asset path with the base path.
+ * Usage: withBasePath("/profile.jpg") -> "/portfolio/profile.jpg".
  */
 export function withBasePath(path: string): string {
-  const base = getBasePath();
-  if (!base) return path;
-  if (!path.startsWith("/")) return `${base}/${path}`;
-  return `${base}${path}`;
+  return `${BASE_PATH}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
 /**
- * Prefix an internal route (pages/anchors) with the base path.
- * Used for anchor links like "#projects" which should remain unchanged.
+ * Prefix an internal route with the base path, leaving anchors and
+ * external http(s) links unchanged.
  */
 export function withBasePathRoute(route: string): string {
   if (route.startsWith("#") || route.startsWith("http")) return route;
-  const base = getBasePath();
-  if (!base) return route;
-  return `${base}${route}`;
+  return `${BASE_PATH}${route.startsWith("/") ? route : `/${route}`}`;
 }

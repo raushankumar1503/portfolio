@@ -6,7 +6,6 @@ import { Container } from "@/components/site/Container";
 import { Button } from "@/components/site/Button";
 import { ArrowDownIcon } from "@/components/site/icons";
 import { heroCta, profile } from "@/content/portfolio";
-import { withBasePath } from "@/lib/basePath";
 
 /**
  * Hero — strong first impression. Typography is the primary layer; the
@@ -90,7 +89,7 @@ export function Hero() {
         <div className="relative aspect-square w-full lg:aspect-[4/5]">
           <div className="absolute inset-0 rounded-[2px] border border-line overflow-hidden">
             <Image
-              src={withBasePath("/profile.jpg")}
+              src="/profile.jpg"
               alt={`${profile.name} — ${profile.role}`}
               fill
               className="object-cover object-top"
