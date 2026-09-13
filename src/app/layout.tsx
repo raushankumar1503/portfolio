@@ -52,6 +52,9 @@ export const metadata: Metadata = {
   icons: {
     icon: withBasePath("/favicon.ico"),
   },
+  verification: {
+    google: "j7BafLt9qoCjwdoV1tjxS5ucrMSnf_WSdki6mTOi_PA",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
